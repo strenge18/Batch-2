@@ -1,0 +1,45 @@
+# Importing modules 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from matplotlib import gridspec
+
+#read the dataset
+dataset = pd.read_csv("creditcarddetect.csv")
+# read the first 5 and last 5 rows of the data
+dataset.head().append(dataset.tail())
+
+# check for relative proportion 
+print("Fraudulent Cases: " + str(len(dataset[dataset["Class"] == 1])))
+print("Valid Transactions: " + str(len(dataset[dataset["Class"] == 0])))
+print("Proportion of Fraudulent Cases: " + str(len(dataset[dataset["Class"] == 1])/ dataset.shape[0]))
+
+# To see how small are the number of Fraud transactions
+data_p = dataset.copy()
+data_p[" "] = np.where(data_p["Class"] == 1 , "Fraud", "Genuine")
+
+# plot a pie chart
+data_p[" "].value_counts().plot(kind="pie")
+
+# plot the named features 
+f, axes = plt.subplots(1, 2, figsize=(18,4), sharex = True)
+
+amount_value = dataset['Amount'].values # values
+time_value = dataset['Time'].values # values
+
+sns.distplot(amount_value, hist=False, color="m", kde_kws={"shade": True}, ax=axes[0]).set_title('Distribution of Amount')
+sns.distplot(time_value, hist=False, color="m", kde_kws={"shade": True}, ax=axes[1]).set_title('Distribution of Time')
+
+plt.show()
+
+print("Average Amount in a Fraudulent Transaction: " + str(dataset[dataset["Class"] == 1]["Amount"].mean()))
+print("Average Amount in a Valid Transaction: " + str(dataset[dataset["Class"] == 0]["Amount"].mean()))
+
+print("Summary of the feature - Amount" + "\n-------------------------------")
+print(dataset["Amount"].describe())
+
+# check for null values
+dataset.isnull().shape[0]
+print("Non-missing values: " + str(dataset.isnull().shape[0]))
+print("Missing values: " + str(dataset.shape[0] - dataset.isnull().shape[0]))
