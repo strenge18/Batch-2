@@ -1,0 +1,10 @@
+dataset,samples,speakers,languages,duration(h),modalities,Emotion/sentiment
+SAMSEMO,23086,~1390,"EN,DE,ES,PL,KO",38:34:00,"1,V,A",e
+CMU-MOSEI,23453,1000,EN,65:53:00,"1,V,A","e,s"
+CMU-MOSEAS,40000,1654,"DE,ES,FR,PT",68:49:00,"1,V,A","e,s"
+MELD,13708,~260,EN,~13:00,"1,V,A","e,s"
+IEMOCAP,10000,10,EN,11:28,"1,V,A",e
+AMAR,288,36,"DE,ES,FR,PT",1:18,"1,V,A",e
+CMU-MOSI,2199,98,EN,2:36,"1,V,A",s
+K-EMOCON,4159,32,KO,2:53,"V,A",e
+CH-SIMS,2281,474,ZH,~02:30,"1,V,A",s
