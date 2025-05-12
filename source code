@@ -1,0 +1,43 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from textblob import TextBlob
+
+# Sample social media text data
+data = {
+    'post': [
+        "I love this new phone! The camera is amazing.",
+        "This is the worst update ever. Totally ruined it.",
+        "Just an average day. Nothing special.",
+        "Feeling fantastic about the trip tomorrow!",
+        "I am so frustrated with this service."
+    ]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Function to classify sentiment
+def get_sentiment(text):
+    polarity = TextBlob(text).sentiment.polarity
+    if polarity > 0:
+        return 'Positive'
+    elif polarity < 0:
+        return 'Negative'
+    else:
+        return 'Neutral'
+
+# Apply sentiment analysis
+df['sentiment'] = df['post'].apply(get_sentiment)
+
+# Count sentiment occurrences
+sentiment_counts = df['sentiment'].value_counts()
+
+# Plot bar chart
+plt.figure(figsize=(6, 4))
+sentiment_counts.plot(kind='bar', color=['green', 'red', 'gray'])
+plt.title('Sentiment Analysis of Social Media Posts')
+plt.xlabel('Sentiment')
+plt.ylabel('Number of Posts')
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.show()
